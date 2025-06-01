@@ -21,7 +21,25 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connecting to MongoDB:', error.message)
   })
 
-app.use(cors())
+
+  const allowedOrigins = [
+    'https://blogapp57.netlify.app',
+    'https://683bfdb8734a1c16e59c4aaf--blogapp57.netlify.app'
+  ];
+  
+  app.use(cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, Postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true // Enable this only if you're using cookies/auth headers
+  }));
+  
+app.options('*', cors());
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)

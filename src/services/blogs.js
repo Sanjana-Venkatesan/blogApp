@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3003/api/blogs'
+const baseUrl = 'https://blogapp-vkb6.onrender.com/api/blogs'
 
 let token = null
 

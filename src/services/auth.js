@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3003/api'
+const baseUrl = 'https://blogapp-vkb6.onrender.com/api'
 
 const login = async (credentials) => {
   const response = await axios.post(`${baseUrl}/login`, credentials)
