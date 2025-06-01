@@ -24,21 +24,22 @@ mongoose.connect(config.MONGODB_URI)
 
   const allowedOrigins = [
     'https://blogapp57.netlify.app',
-    'https://683bfdb8734a1c16e59c4aaf--blogapp57.netlify.app'
+    'https://683c028e78f84c26ef780b65--blogapp57.netlify.app'
   ];
   
   app.use(cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, Postman)
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
       }
     },
-    credentials: true // Enable this only if you're using cookies/auth headers
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true
   }));
   
+  // Enable preflight requests
 app.options('*', cors());
 app.use(express.static('dist'))
 app.use(express.json())
